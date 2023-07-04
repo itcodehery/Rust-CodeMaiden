@@ -1,0 +1,35 @@
+Dependencies
+We can utilize external libraries by declaring them as dependencies. To declare a dependecy, we add the crate name and the desired version number under the [dependencies] table.
+
+[dependencies]
+serde = "1.0.2"      # Uses version "1.0.2"
+serde_derive = "1.0" # Uses version "1.0.X"
+heck = "*"           # Uses version "X.X.X"
+Versioning has a multitude of ways to deal with complex dependency resolution. More information about Cargo’s semantic versioning can be found in the The Cargo Book
+
+When adding dependencies in this manner, Cargo will automatically download the source code for these libraries from crates.io and utilize them when compiling our crate.
+
+We can also pull dependencies directly from a git repository with the git field:
+
+serde = { git = "https://github.com/serde-rs/serde" }
+ 
+# A specific branch
+serde = { git = "https://github.com/serde-rs/serde", branch = "next" }
+ 
+# A specific commit hash
+serde = { git = "https://github.com/serde-rs/serde", rev = "7e19ae8c9486a3bbbe51f1befb05edee94c454f9" }
+Pulling dependencies from our local filesystem is possible with the path field:
+
+my_library = { path = "./../my_library" }
+Features
+Some crates have parts of their library behind a feature gate. We can enable specific features with the features field.
+
+# The `features` field always takes an array of values
+uuid = { version = "0.8", features = ["serde", "v4"] }
+ 
+# We can disable features that are added by default.
+wee_alloc = { version = "0.4.5", default_features = false }
+Additional Configuration
+We are capable of many other things within our manifest file such as specifying [dev-dependencies], declaring [features] for our own crate, creating a [profile] for specific compilation settings, and even making a [workspace] for managing multiple crates within the same package.
+
+For a comprehensive list of all available functionality, check out Cargo’s reference guide for the Manifest Format.
