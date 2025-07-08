@@ -1,1 +1,1 @@
-E:\D\Coding\Repositories\Rust-CodeMaiden\second_program\target\debug\second_program.exe: E:\D\Coding\Repositories\Rust-CodeMaiden\second_program\src\main.rs
+E:\D\Coding\Repositories\Rust-CodeMaiden\second_program\target\debug\second_program.exe: E:\D\Coding\Repositories\Rust-CodeMaiden\second_program\src\diary_helper.rs E:\D\Coding\Repositories\Rust-CodeMaiden\second_program\src\encryption_helper.rs E:\D\Coding\Repositories\Rust-CodeMaiden\second_program\src\main.rs E:\D\Coding\Repositories\Rust-CodeMaiden\second_program\src\passcode_helper.rs
