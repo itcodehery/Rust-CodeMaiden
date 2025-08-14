@@ -8,6 +8,7 @@ use crate::{
     diary_helper::{read_from_diary, write_to_diary},
     passcode_helper::{ask_passcode, initialize_passcode},
 };
+
 fn main() {
     let my_passcode: File = initialize_passcode();
 
