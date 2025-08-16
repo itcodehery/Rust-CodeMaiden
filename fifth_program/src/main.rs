@@ -8,7 +8,7 @@ fn main() {
     let mut integers: Vec<i32> = Vec::new();
     println!("Enter a list of integers: ");
     for i in 0..5 {
-        println!("Int #{}: ", i + 1);
+        print!("Int #{}: ", i + 1);
         input = read!();
         let trimmed = input.trim();
         match trimmed.parse::<i32>() {
@@ -52,9 +52,11 @@ fn get_mode(array: &Vec<i32>) -> i32 {
             .and_modify(|counter| *counter += 1)
             .or_insert(1);
     }
-    println!("{:?}", frequency_map);
-    for i in 0..frequency_map.len() {
-        // TODO: Make the logic!!!!!!!!
-    }
+    frequency_map.iter().for_each(|c| {
+        if mode < *c.1 {
+            mode = *c.0;
+        }
+    });
+
     mode
 }
