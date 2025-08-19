@@ -1,8 +1,9 @@
 pub fn merge(intervals: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+    let mut sorted_intervals: Vec<Vec<i32>> = intervals.clone().sort k();
     let mut merged_intervals: Vec<Vec<i32>> = Vec::new();
-    let mut last_vec: Vec<i32> = intervals[0].clone();
+    let mut last_vec: Vec<i32> = sorted_intervals[0].clone();
     println!("Last vec: {:?}", last_vec);
-    for i in 1..intervals.len() {
+    for i in 1..sorted_intervals.len() {
         if intervals[i][0] <= last_vec[1] {
             merged_intervals.push(vec![last_vec[0], intervals[i][1]]);
         } else {

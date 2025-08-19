@@ -30,7 +30,6 @@ pub fn first_missing_positive(nums: Vec<i32>) -> i32 {
         }
     }
     if missing_pos == 0 {
-        println!("Doesn't have one!");
         missing_pos = largest + 1;
     }
     missing_pos
