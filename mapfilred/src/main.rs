@@ -1,43 +1,68 @@
 fn main() {
-    let new_vec = vec![1, 2, 3, 4, 5, 6, 7, 8, 9];
-    // let fil_vec = filter(&mut new_vec, |x| x > 5);
-
+    let new_vec = vec![10, 20, 30, 40, 50, 60];
     println!("The old vector: {:?}", new_vec);
-    // println!("The filtered vector: {:?}", fil_vec);
-
-    println!("The filter using a trait: {:?}", new_vec.filter(|x| x > 5));
+    println!(
+        "The filter using a trait: {:?}",
+        new_vec.filter(|x| x > &50)
+    );
+    println!(
+        "The sum of all elements: {}",
+        new_vec.reduce(0, |acc, sum| acc + sum)
+    );
+    println!("Double of all elements: {:?}", new_vec.map(|x| x * 2));
 }
 
-trait Filt {
-    fn filter<T>(self: &Self, function: T) -> Vec<i32>
+// Define a trait for implementing Map, Filter and Reduce
+trait MapFilRed<T> {
+    fn filter<F>(&self, predicate: F) -> Vec<T>
     where
-        T: Fn(i32) -> bool;
+        F: Fn(&T) -> bool,
+        T: Clone;
+
+    fn reduce<F, U>(&self, initial: U, function: F) -> U
+    where
+        F: Fn(U, &T) -> U;
+
+    fn map<F, U>(&self, function: F) -> Vec<U>
+    where
+        F: Fn(&T) -> U;
 }
 
-impl Filt for Vec<i32> {
-    fn filter<T>(self: &Self, function: T) -> Vec<i32>
+// Generic implementation for Vec<T>
+impl<T> MapFilRed<T> for Vec<T> {
+    fn filter<F>(&self, predicate: F) -> Vec<T>
     where
-        T: Fn(i32) -> bool,
+        F: Fn(&T) -> bool,
+        T: Clone,
     {
-        let mut filtered_vec = Vec::new();
-        for i in 0..self.len() {
-            if function(self[i]) {
-                filtered_vec.push(self[i]);
+        let mut filtered = Vec::new();
+        for item in self {
+            if predicate(item) {
+                filtered.push(item.clone());
             }
         }
-        filtered_vec
+        filtered
+    }
+
+    fn reduce<F, U>(&self, initial: U, function: F) -> U
+    where
+        F: Fn(U, &T) -> U,
+    {
+        let mut acc = initial;
+        for item in self {
+            acc = function(acc, item);
+        }
+        acc
+    }
+
+    fn map<F, U>(&self, function: F) -> Vec<U>
+    where
+        F: Fn(&T) -> U,
+    {
+        let mut mapped = Vec::new();
+        for item in self {
+            mapped.push(function(item));
+        }
+        mapped
     }
 }
-
-// fn filter<T>(vec: &mut Vec<i32>, function: T) -> Vec<i32>
-// where
-//     T: Fn(i32) -> bool,
-// {
-//     let mut filtered_vec = Vec::new();
-//     for i in 0..vec.len() {
-//         if function(vec[i]) {
-//             filtered_vec.push(vec[i]);
-//         }
-//     }
-//     filtered_vec
-// }
