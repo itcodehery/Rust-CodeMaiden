@@ -1,15 +1,22 @@
+use std::ops::Deref;
+
 fn main() {
-    let new_vec = vec![10, 20, 30, 40, 50, 60];
+    let new_vec = vec![
+        String::from("Hery"),
+        String::from("Arden"),
+        String::from("Arnav"),
+        String::from("Darshan"),
+    ];
     println!("The old vector: {:?}", new_vec);
     println!(
         "The filter using a trait: {:?}",
-        new_vec.filter(|x| x > &50)
+        new_vec.filter(|x| x == "Hery")
     );
+
     println!(
-        "The sum of all elements: {}",
-        new_vec.reduce(0, |acc, sum| acc + sum)
+        "Double of all elements: {:?}",
+        new_vec.map(|x| x.to_string().push_str(" - Member"))
     );
-    println!("Double of all elements: {:?}", new_vec.map(|x| x * 2));
 }
 
 // Define a trait for implementing Map, Filter and Reduce

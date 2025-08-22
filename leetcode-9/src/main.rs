@@ -7,10 +7,15 @@ pub fn is_palindrome(x: i32) -> bool {
 
 fn main() {
     println!("Enter a number: ");
-    let input: String = read!();
-    let input = input.trim();
-    match input.parse::<i32>() {
-        Ok(j) => println!("Is {} a Palindrome?:  {}", j, is_palindrome(j)),
-        Err(..) => println!("Input is not an integer: {}", input),
+    loop {
+        let input: String = read!();
+        let input = input.trim();
+        match input.parse::<i32>() {
+            Ok(j) => println!("Is {} a Palindrome?:  {}", j, is_palindrome(j)),
+            Err(..) => {
+                println!("Input is not an integer: {}", input);
+                break;
+            }
+        }
     }
 }

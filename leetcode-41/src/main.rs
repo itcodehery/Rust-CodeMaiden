@@ -1,3 +1,6 @@
+#[macro_use]
+extern crate text_io;
+
 pub fn first_missing_positive(nums: Vec<i32>) -> i32 {
     let mut missing_pos: i32 = 0;
     let mut sorted_nums = nums.clone();
@@ -36,8 +39,16 @@ pub fn first_missing_positive(nums: Vec<i32>) -> i32 {
 }
 
 fn main() {
-    let vec: Vec<i32> = vec![7, 8, 9, 11, 12];
-    println!("Hello, world!");
+    let mut vec: Vec<i32> = Vec::new();
+    for i in 0..5 {
+        println!("Enter number {}", i + 1);
+        let input: String = read!();
+        let input = input.trim();
+        match input.parse::<i32>() {
+            Ok(val) => vec.push(val),
+            Err(..) => println!("Couldn't parse! Not an integer!"),
+        }
+    }
     println!(
         "The first missing positive: {}",
         first_missing_positive(vec)
