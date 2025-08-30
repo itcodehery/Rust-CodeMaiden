@@ -26,9 +26,17 @@ fn main() {
             width: 10,
             height: 30,
         },
-        Message::Move(Point { x: 10, y: 15 }),
-        Message::Echo(String::from("hello world")),
-        Message::ChangeColor(200, 255, 255),
+        Message::Move {
+            point: Point { x: 10, y: 15 },
+        },
+        Message::Echo {
+            str: String::from("hello world"),
+        },
+        Message::ChangeColor {
+            x: 200,
+            y: 255,
+            z: 200,
+        },
         Message::Quit,
     ];
 
