@@ -9,12 +9,12 @@ struct Pet {
 
 impl Pet {
     fn new() -> Pet {
-        return Pet {
+        Pet {
             name: String::new(),
             species: String::new(),
             price: 0.0,
             is_trained: false,
-        };
+        }
     }
 }
 
@@ -44,7 +44,8 @@ fn main() {
     println!("Is Trained? (yes/no)");
     io::stdin().read_line(&mut str).unwrap();
 
-    let str = str.trim().to_lowercase().as_str();
+    let something = str.trim().to_lowercase();
+    let str = something.as_str();
     match str {
         "yes" => new_pet.is_trained = true,
         "no" => new_pet.is_trained = false,
