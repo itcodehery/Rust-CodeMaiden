@@ -17,7 +17,8 @@ mod tests {
     #[test]
     fn you_can_assert() {
         // TODO: Test the function `is_even` with some values.
-        assert!();
-        assert!();
+        use crate::is_even;
+        assert!(!is_even(3));
+        assert!(is_even(2));
     }
 }
