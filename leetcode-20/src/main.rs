@@ -1,4 +1,5 @@
 // Leetcode-20: Valid Parenthesis
+use std::collections::HashMap;
 
 pub fn is_valid(s: String) -> bool {
     // let mut stack: Vec<char> = Vec::new();
@@ -15,7 +16,7 @@ pub fn is_valid(s: String) -> bool {
     // }
     //
     // New Idea: Hashmaps for each
-    let mut hash_table: std::collections::HashMap<char, i32> = HashMap::new();
+    let mut hash_table: HashMap<char, i32> = HashMap::new();
     for i in s.chars() {
         hash_table.entry(i).and_modify(|x| *x += 1).or_insert(1);
     }
