@@ -1,25 +1,18 @@
-use std::{any::Any, collections::btree_map::RangeMut};
+use std::{io, str::Chars};
 
-fn pr_sentence_case(string: &str) -> &str {
-    let string = string.trim();
-    let words = string.split(" ");
-
-    let mut words: Vec<String> = words.into_iter().map(|x| x.to_string()).collect();
-    words.iter().nth(0).unwrap().replace_range(
-        0..=1,
-        words[0]
-            .chars()
-            .nth(0)
-            .unwrap()
-            .to_ascii_uppercase()
-            .to_string()
-            .as_str(),
-    );
-
-    let res = words.join(" ");
-    res.as_str()
+fn to_sentence_case(str: &mut String) -> String {
+    let mut temp = str.as_mut_str();
+    let chararr: Chars = temp.chars();
+    for ref mut character in chararr {
+        *character = character.to_ascii_uppercase();
+        break;
+    }
 }
 
 fn main() {
-    println!("Hello, world!");
+    let mut string: String = String::new();
+    println!("Enter a sentence: ");
+    io::stdin().read_line(&mut string).unwrap();
+
+    println!("\n{}", to_sentence_case(&mut string));
 }
