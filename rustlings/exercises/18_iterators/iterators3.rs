@@ -11,7 +11,7 @@ enum DivisionError {
 // TODO: Calculate `a` divided by `b` if `a` is evenly divisible by `b`.
 // Otherwise, return a suitable error.
 fn divide(a: i64, b: i64) -> Result<i64, DivisionError> {
-    if b == 0.0 {
+    if b == 0 {
         Err(DivisionError::DivideByZero)
     } else if a == i64::MIN {
         Err(DivisionError::IntegerOverflow)
