@@ -2,38 +2,50 @@
 use std::collections::HashMap;
 
 pub fn is_valid(s: String) -> bool {
-    // let mut stack: Vec<char> = Vec::new();
-    // let str = s.chars();
-    // let mut bracket_flag = true;
+    let mut pairs: HashMap<char, char> = HashMap::new();
+    pairs.insert('[', ']');
+    pairs.insert('{', '}');
+    pairs.insert('(', ')');
 
-    // for i in str {
-    //     if i == '(' || i == '{' || i == '[' {
-    //         bracket_flag = false;
-    //     }
-    //     if i == ')' || i == '}' || i == ']' {
-    //         bracket_flag = true;
-    //     }
-    // }
-    //
-    // New Idea: Hashmaps for each
-    let mut hash_table: HashMap<char, i32> = HashMap::new();
-    for i in s.chars() {
-        hash_table.entry(i).and_modify(|x| *x += 1).or_insert(1);
-    }
-    println!("{:?}", hash_table);
-    let mut bracket_flag = true;
+    let mut stack: Vec<char> = vec![];
     for char in s.chars() {
-        bracket_flag = match char {
-            ')' => hash_table.get(&'(').unwrap_or(&0) == hash_table.get(&')').unwrap_or(&0),
-            ']' => hash_table.get(&'[').unwrap_or(&0) == hash_table.get(&']').unwrap_or(&0),
-            '}' => hash_table.get(&'{').unwrap_or(&0) == hash_table.get(&'}').unwrap_or(&0),
-            _ => false,
+        match char {
+            '[' => {
+                stack.push(char);
+            }
+            '{' => {
+                stack.push(char);
+            }
+            '(' => {
+                stack.push(char);
+            }
+            ']' => {
+                if stack.contains(&'[') {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            }
+            '}' => {
+                if stack.contains(&'}') {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            }
+            ')' => {
+                if stack.contains(&')') {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            }
+            _ => {}
         }
     }
-
-    bracket_flag
+    if stack.is_empty() { true } else { false }
 }
 
 fn main() {
-    println!("{}", is_valid(String::from("}{}{")));
+    println!("{}", is_valid(String::from("(){}{[]}")));
 }
