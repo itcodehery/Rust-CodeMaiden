@@ -20,21 +20,7 @@ pub fn is_valid(s: String) -> bool {
                 stack.push(char);
             }
             ']' => {
-                if stack.contains(&'[') {
-                    stack.pop();
-                } else {
-                    return false;
-                }
-            }
-            '}' => {
-                if stack.contains(&'}') {
-                    stack.pop();
-                } else {
-                    return false;
-                }
-            }
-            ')' => {
-                if stack.contains(&')') {
+                if stack.top {
                     stack.pop();
                 } else {
                     return false;
