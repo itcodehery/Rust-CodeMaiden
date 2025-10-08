@@ -28,6 +28,6 @@ fn linear_search(arr: &Vec<i32>, key: &i32) -> u32 {
     return u32::MAX;
 }
 
-fn binary_search(arr: &Vec<i32>, key: &i32) -> u32 {
-    let mut mid = arr[arr.len() / 2];
-}
+// fn binary_search(arr: &Vec<i32>, key: &i32) -> u32 {
+// let mut mid = arr[arr.len() / 2];
+// }
