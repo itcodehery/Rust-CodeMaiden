@@ -18,13 +18,13 @@ fn main() {
 
     let mut handles = Vec::new();
     for _ in 0..10 {
-        let status_shared = Arc::clone(&status);
+        let status_shared = status.clone();
         let handle = thread::spawn(move || {
             thread::sleep(Duration::from_millis(250));
 
             // TODO: You must take an action before you update a shared value.
-            status_shared.lock();
-            status_shared.into_inner().unwrap().jobs_done += 1;
+            let mut counter = status_shared.lock().unwrap();
+            counter.jobs_done += 1;
         });
         handles.push(handle);
     }
@@ -35,5 +35,5 @@ fn main() {
     }
 
     // TODO: Print the value of `JobStatus.jobs_done`.
-    println!("Jobs done: {}", todo!());
+    println!("Jobs done: {}", status.lock().unwrap().jobs_done);
 }
