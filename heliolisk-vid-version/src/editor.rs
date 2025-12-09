@@ -1,10 +1,17 @@
-mod editor;
+use crate::Document;
+use std::marker::PhantomData;
+
+pub struct NavigateMode;
+pub struct EditMode;
+pub struct SelectMode;
+pub struct CommandMode;
 
 // Editor struct
-pub struct Editor {
+pub struct Editor<State = NavigateMode> {
     buffers: Vec<Document>,
     current_focused_idx: usize,
     is_quittable: bool,
+    state: PhantomData<State>,
 }
 
 impl Editor {
@@ -13,6 +20,7 @@ impl Editor {
             buffers,
             current_focused_idx: 0,
             is_quittable: true,
+            state: PhantomData::<NavigateMode>,
         }
     }
 
